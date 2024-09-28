@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_grid/src/models/grid_color.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class Grid extends StatelessWidget {
   final List<List<GridColor>> gridData;
@@ -53,4 +54,40 @@ class Grid extends StatelessWidget {
       },
     );
   }
+}
+
+@widgetbook.UseCase(
+  name: 'Quiz',
+  type: Grid,
+)
+Grid answerMode(BuildContext context) {
+  final gridData = [
+    [GridColor.white, GridColor.black, GridColor.white, GridColor.white],
+    [GridColor.black, GridColor.black, GridColor.white, GridColor.black],
+    [GridColor.white, GridColor.white, GridColor.black, GridColor.white],
+    [GridColor.white, GridColor.black, GridColor.white, GridColor.white],
+  ];
+  return Grid(
+    gridData: gridData,
+    rows: 4,
+    columns: 4,
+  );
+}
+
+@widgetbook.UseCase(
+  name: 'Result',
+  type: Grid,
+)
+Grid resultMode(BuildContext context) {
+  final gridData = [
+    [GridColor.white, GridColor.green, GridColor.white, GridColor.white],
+    [GridColor.green, GridColor.red, GridColor.white, GridColor.green],
+    [GridColor.white, GridColor.white, GridColor.green, GridColor.white],
+    [GridColor.white, GridColor.green, GridColor.white, GridColor.yellow],
+  ];
+  return Grid(
+    gridData: gridData,
+    rows: 4,
+    columns: 4,
+  );
 }
