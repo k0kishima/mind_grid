@@ -34,7 +34,10 @@ class Grid extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final double cellSize = (constraints.maxWidth / columns) - 2;
+        final double maxCellWidth = (constraints.maxWidth / columns) - 2;
+        final double maxCellHeight = (constraints.maxHeight / rows) - 2;
+        final double cellSize =
+            maxCellWidth < maxCellHeight ? maxCellWidth : maxCellHeight;
 
         return Column(
           children: List.generate(rows, (rowIndex) {

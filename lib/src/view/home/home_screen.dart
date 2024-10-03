@@ -21,33 +21,39 @@ class HomeScreen extends ConsumerWidget {
         child: Column(
           children: [
             SettingsSliderWidget(
-              value: gridWidth.toInt(),
+              value: gridWidth,
               min: 4,
               max: 10,
               divisions: 8,
               label: 'Grid Width',
               onChanged: (value) {
-                ref.read(settingProvider.notifier).setGridWidth(value.toInt());
+                ref.read(settingProvider.notifier).setGridWidth(value);
               },
             ),
             SettingsSliderWidget(
-              value: gridHeight.toInt(),
+              value: gridHeight,
               min: 4,
               max: 10,
               divisions: 8,
               label: 'Grid Height',
               onChanged: (value) {
-                ref.read(settingProvider.notifier).setGridHeight(value.toInt());
+                ref.read(settingProvider.notifier).setGridHeight(value);
               },
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.go('/play/question');
-              },
-              child: const Text('Go to Question Screen'),
             ),
           ],
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Save settings and navigate to Question Screen
+          context.go('/play/question');
+        },
+        child: const Icon(Icons.play_arrow),
+      ),
+      bottomNavigationBar: const BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 8.0,
       ),
     );
   }
