@@ -1,8 +1,7 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mind_grid/src/models/grid_color.dart';
+import 'package:mind_grid/src/providers/game.dart';
 import 'package:mind_grid/src/providers/setting.dart';
 import 'package:mind_grid/src/widgets/grid.dart';
 
@@ -15,14 +14,8 @@ class QuestionScreen extends ConsumerWidget {
     final gridWidth = settings.gridWidth;
     final gridHeight = settings.gridHeight;
 
-    final random = Random();
-    final gridData = List.generate(
-      gridHeight,
-      (row) => List.generate(
-        gridWidth,
-        (col) => random.nextBool() ? GridColor.white : GridColor.black,
-      ),
-    );
+    final game =
+        ref.watch(gameProvider({'width': gridWidth, 'height': gridHeight}));
 
     return Scaffold(
       appBar: AppBar(
@@ -47,7 +40,7 @@ class QuestionScreen extends ConsumerWidget {
                   maxHeight: totalHeight,
                 ),
                 child: Grid(
-                  gridData: gridData,
+                  gridData: game.gridData,
                   rows: gridHeight,
                   columns: gridWidth,
                 ),
