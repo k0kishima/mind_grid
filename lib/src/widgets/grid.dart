@@ -4,14 +4,12 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 class Grid extends StatelessWidget {
   final List<List<GridColor>> gridData;
-  final int rows;
-  final int columns;
+  final void Function(int row, int col)? onTap;
 
   const Grid({
     super.key,
     required this.gridData,
-    required this.rows,
-    required this.columns,
+    this.onTap,
   });
 
   Color _getColor(GridColor gridColor) {
@@ -32,6 +30,9 @@ class Grid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final rows = gridData.length;
+    final columns = rows > 0 ? gridData[0].length : 0;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final double maxCellWidth = (constraints.maxWidth / columns) - 2;
@@ -44,11 +45,18 @@ class Grid extends StatelessWidget {
             return Row(
               children: List.generate(columns, (colIndex) {
                 final color = _getColor(gridData[rowIndex][colIndex]);
-                return Container(
-                  width: cellSize,
-                  height: cellSize,
-                  color: color,
-                  margin: const EdgeInsets.all(1.0),
+                return GestureDetector(
+                  onTap: () {
+                    if (onTap != null) {
+                      onTap!(rowIndex, colIndex);
+                    }
+                  },
+                  child: Container(
+                    width: cellSize,
+                    height: cellSize,
+                    color: color,
+                    margin: const EdgeInsets.all(1.0),
+                  ),
                 );
               }),
             );
@@ -58,6 +66,7 @@ class Grid extends StatelessWidget {
     );
   }
 }
+
 
 @widgetbook.UseCase(
   name: 'Quiz',
@@ -72,8 +81,6 @@ Grid answerMode(BuildContext context) {
   ];
   return Grid(
     gridData: gridData,
-    rows: 4,
-    columns: 4,
   );
 }
 
@@ -90,7 +97,5 @@ Grid resultMode(BuildContext context) {
   ];
   return Grid(
     gridData: gridData,
-    rows: 4,
-    columns: 4,
   );
 }

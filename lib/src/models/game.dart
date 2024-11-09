@@ -22,4 +22,9 @@ class Game {
       isAnswerSubmitted: isAnswerSubmitted ?? this.isAnswerSubmitted,
     );
   }
+
+  @override
+  String toString() {
+    return 'Game(gridData: $gridData, userAnswers: $userAnswers, isAnswerSubmitted: $isAnswerSubmitted)';
+  }
 }
