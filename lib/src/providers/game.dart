@@ -11,8 +11,8 @@ class GameNotifier extends _$GameNotifier {
   Game build({int gridWidth = 8, int gridHeight = 8}) {
     return Game(
       gridData: _generateRandomGrid(gridWidth, gridHeight),
-      userAnswers: List.generate(gridHeight,
-          (_) => List.generate(gridWidth, (_) => GridColor.white)),
+      userAnswers: List.generate(
+          gridHeight, (_) => List.generate(gridWidth, (_) => GridColor.white)),
     );
   }
 

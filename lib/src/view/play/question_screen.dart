@@ -14,7 +14,8 @@ class QuestionScreen extends ConsumerWidget {
     final gridWidth = settings.gridWidth;
     final gridHeight = settings.gridHeight;
 
-    final game = ref.watch(gameNotifierProvider(gridWidth: gridWidth, gridHeight: gridHeight));
+    final game = ref.watch(
+        gameNotifierProvider(gridWidth: gridWidth, gridHeight: gridHeight));
 
     return Scaffold(
       appBar: AppBar(

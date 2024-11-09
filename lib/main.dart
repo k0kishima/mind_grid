@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mind_grid/src/view/home/home_screen.dart';
 import 'package:mind_grid/src/view/play/question_screen.dart';
 import 'package:mind_grid/src/view/play/answer_screen.dart';
+import 'package:mind_grid/src/view/play/result_screen.dart';
 import 'package:go_router/go_router.dart';
 
 void main() {
@@ -34,6 +35,10 @@ final _router = GoRouter(
         GoRoute(
           path: 'play/answer',
           builder: (context, state) => const AnswerScreen(),
+        ),
+        GoRoute(
+          path: 'play/result',
+          builder: (context, state) => const ResultScreen(),
         ),
       ],
     ),
