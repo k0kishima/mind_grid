@@ -9,11 +9,21 @@ part 'game.g.dart';
 class GameNotifier extends _$GameNotifier {
   @override
   Game build({int gridWidth = 8, int gridHeight = 8}) {
+    return _createNewGame(gridWidth, gridHeight);
+  }
+
+  Game _createNewGame(int gridWidth, int gridHeight) {
     return Game(
       gridData: _generateRandomGrid(gridWidth, gridHeight),
       userAnswers: List.generate(
-          gridHeight, (_) => List.generate(gridWidth, (_) => GridColor.white)),
+        gridHeight,
+        (_) => List.generate(gridWidth, (_) => GridColor.white),
+      ),
     );
+  }
+
+  void resetGame({int gridWidth = 8, int gridHeight = 8}) {
+    state = _createNewGame(gridWidth, gridHeight);
   }
 
   static List<List<GridColor>> _generateRandomGrid(int width, int height) {

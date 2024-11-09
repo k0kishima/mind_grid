@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mind_grid/src/providers/game.dart';
 import 'package:mind_grid/src/widgets/grid.dart';
 import 'package:mind_grid/src/models/grid_color.dart';
@@ -52,6 +53,13 @@ class ResultScreen extends ConsumerWidget {
             gridData: resultGrid,
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.go('/play/question');
+        },
+        tooltip: 'Replay',
+        child: const Icon(Icons.replay),
       ),
     );
   }

@@ -46,7 +46,6 @@ class HomeScreen extends ConsumerWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Save settings and navigate to Question Screen
           context.go('/play/question');
         },
         child: const Icon(Icons.play_arrow),

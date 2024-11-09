@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mind_grid/src/providers/game.dart';
 import 'package:mind_grid/src/providers/setting.dart';
 import 'package:mind_grid/src/widgets/grid.dart';
 
-class QuestionScreen extends ConsumerWidget {
+class QuestionScreen extends HookConsumerWidget {
   const QuestionScreen({super.key});
 
   @override
@@ -13,6 +14,17 @@ class QuestionScreen extends ConsumerWidget {
     final settings = ref.watch(settingProvider);
     final gridWidth = settings.gridWidth;
     final gridHeight = settings.gridHeight;
+
+    final gameNotifier = ref.read(
+        gameNotifierProvider(gridWidth: gridWidth, gridHeight: gridHeight)
+            .notifier);
+
+    useEffect(() {
+      Future.delayed(Duration.zero, () {
+        gameNotifier.resetGame(gridWidth: gridWidth, gridHeight: gridHeight);
+      });
+      return null;
+    }, []);
 
     final game = ref.watch(
         gameNotifierProvider(gridWidth: gridWidth, gridHeight: gridHeight));
